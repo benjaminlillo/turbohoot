@@ -1,0 +1,52 @@
+[
+  {
+    "id": "q1",
+    "text": "¿Qué significa CSS?",
+    "options": [
+      { "id": "o1", "text": "Computer Style Sheets", "isCorrect": false },
+      { "id": "o2", "text": "Cascading Style Sheets", "isCorrect": true },
+      { "id": "o3", "text": "Creative Style Sheets", "isCorrect": false },
+      { "id": "o4", "text": "Colorful Style Sheets", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q2",
+    "text": "¿Cuál de estos NO es un lenguaje de programación?",
+    "options": [
+      { "id": "o1", "text": "Python", "isCorrect": false },
+      { "id": "o2", "text": "Java", "isCorrect": false },
+      { "id": "o3", "text": "HTML", "isCorrect": true },
+      { "id": "o4", "text": "C++", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q3",
+    "text": "¿En qué año se lanzó el primer iPhone?",
+    "options": [
+      { "id": "o1", "text": "2005", "isCorrect": false },
+      { "id": "o2", "text": "2006", "isCorrect": false },
+      { "id": "o3", "text": "2007", "isCorrect": true },
+      { "id": "o4", "text": "2008", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q4",
+    "text": "¿Qué empresa compró GitHub en 2018?",
+    "options": [
+      { "id": "o1", "text": "Google", "isCorrect": false },
+      { "id": "o2", "text": "Microsoft", "isCorrect": true },
+      { "id": "o3", "text": "Amazon", "isCorrect": false },
+      { "id": "o4", "text": "Facebook", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q5",
+    "text": "¿Cuál es la capital de Japón?",
+    "options": [
+      { "id": "o1", "text": "Seúl", "isCorrect": false },
+      { "id": "o2", "text": "Kioto", "isCorrect": false },
+      { "id": "o3", "text": "Osaka", "isCorrect": false },
+      { "id": "o4", "text": "Tokio", "isCorrect": true }
+    ]
+  }
+]
