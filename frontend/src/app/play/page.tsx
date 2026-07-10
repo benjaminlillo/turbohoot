@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -8,6 +8,14 @@ export default function Play() {
   const [pin, setPin] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const joinPin = params.get("join");
+    if (joinPin) {
+      setPin(joinPin);
+    }
+  }, []);
 
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault();
