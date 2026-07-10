@@ -21,6 +21,14 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   
   const [results, setResults] = useState<any>(null);
   const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  const [joinUrl, setJoinUrl] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setJoinUrl(`${window.location.origin}/play?join=${pin}`);
+    }
+  }, [pin]);
 
   useEffect(() => {
     if (!socket) return;
@@ -94,9 +102,26 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   const renderLobby = () => (
     <div className="flex flex-col items-center w-full h-full p-8">
       <div className="glass-panel p-8 flex justify-between items-center w-full max-w-4xl mb-8">
-        <div>
-          <h2 className="text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
-          <div className="text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <h2 className="text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
+            <div className="text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
+          </div>
+          {joinUrl && (
+            <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit">
+              <span className="text-sm text-gray-400 px-2 truncate max-w-[200px] sm:max-w-[300px]">{joinUrl}</span>
+              <button 
+                onClick={() => {
+                  navigator.clipboard.writeText(joinUrl);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+                className="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
+              >
+                {copied ? 'Copied!' : 'Copy Link'}
+              </button>
+            </div>
+          )}
         </div>
         <button 
           onClick={handleStart}
