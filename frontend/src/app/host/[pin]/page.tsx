@@ -104,8 +104,8 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
       <div className="glass-panel p-8 flex justify-between items-center w-full max-w-4xl mb-8">
         <div className="flex flex-col gap-4">
           <div>
-            <h2 className="text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
-            <div className="text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
+            <h2 className="text-lg md:text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
+            <div className="text-4xl md:text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
           </div>
           {joinUrl && (
             <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit">
@@ -163,8 +163,8 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
           </div>
         </div>
 
-        <div className="glass-panel p-12 w-full max-w-4xl mb-12 flex items-center justify-center min-h-[300px]">
-          <h2 className="text-4xl font-bold text-center leading-tight">{question?.text}</h2>
+        <div className="glass-panel p-6 md:p-12 w-full max-w-4xl mb-12 flex items-center justify-center min-h-[200px] md:min-h-[300px]">
+          <h2 className="text-2xl md:text-4xl font-bold text-center leading-tight">{question?.text}</h2>
         </div>
 
         <div className="answer-grid max-w-6xl w-full">
@@ -178,11 +178,11 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
             return (
               <div
                 key={opt.id}
-                className={`answer-btn ${colors[index % 4]} flex items-center justify-between px-8 cursor-default pointer-events-none text-2xl`}
+                className={`answer-btn ${colors[index % 4]} flex items-center justify-between px-4 md:px-8 cursor-default pointer-events-none text-lg md:text-2xl`}
               >
-                <div className="drop-shadow-md">{shapes[index % 4]}</div>
+                <div className="drop-shadow-md scale-75 md:scale-100">{shapes[index % 4]}</div>
                 <span className="font-bold flex-1 text-center drop-shadow-md">{opt.text}</span>
-                <div className="w-12"></div>
+                <div className="w-8 md:w-12"></div>
               </div>
             );
           })}
@@ -203,22 +203,22 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
           </button>
         </div>
 
-        <div className="flex-1 w-full flex items-end justify-center gap-8 mb-12 max-w-5xl">
+        <div className="flex-1 w-full flex items-end justify-center gap-2 md:gap-8 mb-12 max-w-5xl">
           {question?.options.map((opt: any, index: number) => {
             const count = results?.answerCounts?.[opt.id] || 0;
             const isCorrect = results?.correctOptionId === opt.id;
             const maxCount = Math.max(...(Object.values(results?.answerCounts || {0:0}) as number[]), 1);
-            const height = `${Math.max(15, (count / maxCount) * 100)}%`;
+            const scaleY = count / maxCount;
 
             return (
-              <div key={opt.id} className="flex flex-col items-center flex-1 h-[400px] justify-end">
-                <div className="text-3xl font-bold mb-4">{count}</div>
+              <div key={opt.id} className="flex flex-col items-center flex-1 h-[250px] md:h-[400px] justify-end">
+                <div className="text-xl md:text-3xl font-bold mb-4">{count}</div>
                 <div 
-                  className={`w-full rounded-t-xl transition-all duration-700 flex items-start justify-center pt-6 ${colors[index % 4]} ${!isCorrect && 'opacity-30 grayscale-[50%]'} result-bar shadow-2xl`}
-                  style={{ height }}
+                  className={`w-full rounded-t-xl transition-transform duration-700 flex items-start justify-center pt-2 md:pt-6 ${colors[index % 4]} ${!isCorrect && 'opacity-30 grayscale-[50%]'} result-bar shadow-2xl`}
+                  style={{ transform: `scaleY(${scaleY})` }}
                 >
                   {isCorrect && (
-                    <svg className="drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg className="drop-shadow-lg scale-75 md:scale-100" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   )}
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
 
   const renderLeaderboard = () => (
     <div className="flex flex-col items-center w-full min-h-screen p-8">
-      <h2 className="text-6xl font-black mb-16 mt-12 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-amber-600 drop-shadow-md">
+      <h2 className="text-4xl md:text-6xl font-black mb-16 mt-12 text-yellow-400 drop-shadow-[0_4px_15px_rgba(250,204,21,0.4)]">
         Leaderboard
       </h2>
       

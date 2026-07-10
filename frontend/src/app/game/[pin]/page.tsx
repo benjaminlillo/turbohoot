@@ -98,19 +98,19 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
   };
 
   const renderLobby = () => (
-    <div className="glass-panel p-12 flex flex-col items-center animate-fade-in text-center">
-      <h2 className="text-3xl font-bold mb-4">You're in!</h2>
-      <p className="text-xl">See your nickname on screen</p>
-      <div className="mt-8 text-4xl font-black text-[var(--primary-light)]">{name}</div>
+    <div className="glass-panel p-6 md:p-12 flex flex-col items-center animate-fade-in text-center mx-4">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">You're in!</h2>
+      <p className="text-lg md:text-xl">See your nickname on screen</p>
+      <div className="mt-8 text-3xl md:text-4xl font-black text-[var(--primary-light)]">{name}</div>
     </div>
   );
 
   const renderQuestion = () => {
     if (hasAnswered) {
       return (
-        <div className="glass-panel p-12 flex flex-col items-center animate-fade-in text-center">
-          <h2 className="text-3xl font-bold mb-4">Waiting for others...</h2>
-          <div className="animate-pulse w-16 h-16 rounded-full bg-[var(--primary)] mt-8"></div>
+        <div className="glass-panel p-6 md:p-12 flex flex-col items-center animate-fade-in text-center mx-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Waiting for others...</h2>
+          <div className="animate-pulse w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--primary)] mt-8"></div>
         </div>
       );
     }
@@ -119,12 +119,12 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
 
     return (
       <div className="w-full h-full flex flex-col items-center justify-center p-4 animate-fade-in relative pt-16">
-        <div className="absolute top-4 w-full flex justify-between px-8 items-center">
-          <div className="text-2xl font-bold">{timeLeft}</div>
+        <div className="absolute top-4 w-full flex justify-between px-4 md:px-8 items-center">
+          <div className="text-xl md:text-2xl font-bold">{timeLeft}</div>
         </div>
         
-        <div className="glass-panel p-6 mb-8 w-full max-w-4xl text-center">
-          <h2 className="text-2xl font-bold">{question?.text}</h2>
+        <div className="glass-panel p-4 md:p-6 mb-4 md:mb-8 w-full max-w-4xl text-center">
+          <h2 className="text-xl md:text-2xl font-bold">{question?.text}</h2>
         </div>
 
         <div className="answer-grid h-full max-h-[60vh] w-full max-w-4xl">
@@ -144,11 +144,11 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
                 key={opt.id}
                 onClick={() => handleAnswer(opt.id)}
                 disabled={hasAnswered}
-                className={`answer-btn ${colors[index % 4]} flex items-center justify-between px-8 text-xl ${hasAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`answer-btn ${colors[index % 4]} flex items-center justify-between px-4 md:px-8 text-lg md:text-xl ${hasAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <div className="drop-shadow-md">{shapes[index % 4]}</div>
+                <div className="drop-shadow-md scale-75 md:scale-100">{shapes[index % 4]}</div>
                 <span className="font-bold flex-1 text-center drop-shadow-md">{opt.text}</span>
-                <div className="w-8"></div> {/* Spacer for balance */}
+                <div className="w-6 md:w-8"></div> {/* Spacer for balance */}
               </button>
             );
           })}
@@ -162,9 +162,9 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
     // Actually, we didn't save what the player answered locally, but we can visually show correct/incorrect if we save the selected option.
     // Let's assume we just wait for next question here or show a generic result message.
     return (
-      <div className="glass-panel p-12 flex flex-col items-center animate-fade-in text-center">
-        <h2 className="text-4xl font-bold mb-4">Time's Up!</h2>
-        <p className="text-xl text-gray-300 mb-8">Look at the host screen for results.</p>
+      <div className="glass-panel p-6 md:p-12 flex flex-col items-center animate-fade-in text-center mx-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Time's Up!</h2>
+        <p className="text-lg md:text-xl text-gray-300 mb-4 md:mb-8">Look at the host screen for results.</p>
       </div>
     );
   };
@@ -173,12 +173,12 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
     const myRank = leaderboard.findIndex(p => p.name === name) + 1;
     const me = leaderboard.find(p => p.name === name);
     return (
-      <div className="glass-panel p-12 w-full max-w-lg flex flex-col items-center animate-fade-in">
-        <h2 className="text-4xl font-bold mb-8 text-[var(--secondary-light)]">Final Results</h2>
-        <div className="text-2xl mb-4">Your Rank: #{myRank > 0 ? myRank : '-'}</div>
-        <div className="text-xl text-gray-300">Total Score: {me?.score || 0}</div>
+      <div className="glass-panel p-6 md:p-12 w-full max-w-lg flex flex-col items-center animate-fade-in mx-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-[var(--secondary-light)]">Final Results</h2>
+        <div className="text-xl md:text-2xl mb-4">Your Rank: #{myRank > 0 ? myRank : '-'}</div>
+        <div className="text-lg md:text-xl text-gray-300">Total Score: {me?.score || 0}</div>
         
-        <button onClick={() => router.push("/")} className="btn-primary mt-12 py-3 px-8 text-lg">
+        <button onClick={() => router.push("/")} className="btn-primary mt-8 md:mt-12 py-3 px-8 text-lg w-full md:w-auto">
           Back to Home
         </button>
       </div>

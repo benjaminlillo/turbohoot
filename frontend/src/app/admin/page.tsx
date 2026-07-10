@@ -83,7 +83,7 @@ export default function Admin() {
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
             />
             <div className={`flex flex-col items-center justify-center gap-4 transition-transform duration-300 group-hover:scale-105 ${file ? 'text-[var(--secondary-light)]' : 'text-white'}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`drop-shadow-lg ${file ? 'animate-bounce' : ''}`}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`drop-shadow-lg transition-transform duration-500 ease-out ${file ? 'scale-110 text-[var(--secondary-light)]' : ''}`}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
               <span className="font-bold text-xl drop-shadow-sm">{file ? file.name : "Drag & Drop JSON File"}</span>
               {!file && <span className="text-sm text-gray-400">or click to browse</span>}
             </div>
