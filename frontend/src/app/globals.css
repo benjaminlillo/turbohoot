@@ -153,20 +153,24 @@ body {
 .answer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 1rem;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  max-height: 55vh;
 }
 
 @media (min-width: 768px) {
   .answer-grid {
     gap: 1.5rem;
+    max-height: none;
   }
 }
 
 .answer-btn {
-  height: 120px;
+  height: 100%;
+  min-height: 80px;
   border-radius: 1rem;
   border: none;
   cursor: pointer;
