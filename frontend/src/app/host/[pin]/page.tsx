@@ -203,35 +203,49 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
           </button>
         </div>
 
-        <div className="flex-1 w-full flex items-end justify-center gap-2 md:gap-8 mb-12 max-w-5xl">
+        <div className="flex-1 w-full flex items-end justify-center gap-4 md:gap-12 mb-12 max-w-6xl mt-8">
           {question?.options.map((opt: any, index: number) => {
             const count = results?.answerCounts?.[opt.id] || 0;
             const isCorrect = results?.correctOptionId === opt.id;
             const maxCount = Math.max(...(Object.values(results?.answerCounts || {0:0}) as number[]), 1);
-            const scaleY = count / maxCount;
+            const heightPercent = maxCount === 0 ? 0 : (count / maxCount) * 100;
 
             return (
-              <div key={opt.id} className="flex flex-col items-center flex-1 h-[250px] md:h-[400px] justify-end">
-                <div className="text-xl md:text-3xl font-bold mb-4">{count}</div>
+              <div key={opt.id} className="flex flex-col items-center flex-1 h-[300px] md:h-[450px] justify-end relative">
+                <div className="text-2xl md:text-5xl font-black mb-4 drop-shadow-lg">{count}</div>
                 <div 
-                  className={`w-full rounded-t-xl transition-transform duration-700 flex items-start justify-center pt-2 md:pt-6 ${colors[index % 4]} ${!isCorrect && 'opacity-30 grayscale-[50%]'} result-bar shadow-2xl`}
-                  style={{ transform: `scaleY(${scaleY})` }}
+                  className={`w-full rounded-t-xl transition-all duration-1000 ease-out flex flex-col items-center justify-start pt-4 md:pt-8 ${colors[index % 4]} ${!isCorrect && 'opacity-50 grayscale-[30%]'} shadow-2xl relative overflow-hidden`}
+                  style={{ height: \`${Math.max(heightPercent, 5)}%\` }}
                 >
-                  {isCorrect && (
-                    <svg className="drop-shadow-lg scale-75 md:scale-100" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <div className="relative z-10">
+                    {isCorrect ? (
+                      <svg className="drop-shadow-lg text-white mb-2" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    ) : (
+                      <svg className="drop-shadow-lg text-white/50 mb-2 scale-75" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    )}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
         
-        <div className="w-full max-w-5xl grid grid-cols-2 gap-4">
-           {question?.options.map((opt: any, index: number) => (
-             <div key={opt.id} className={`p-4 rounded-lg flex items-center ${colors[index % 4]} ${results?.correctOptionId !== opt.id ? 'opacity-50' : ''}`}>
-               <span className="font-bold text-xl">{opt.text}</span>
-             </div>
-           ))}
+        <div className="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+           {question?.options.map((opt: any, index: number) => {
+             const shapes = [
+               <svg key="triangle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 20H2L12 2Z"/></svg>,
+               <svg key="diamond" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg>,
+               <svg key="circle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>,
+               <svg key="square" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+             ];
+             return (
+               <div key={opt.id} className={`p-4 md:p-6 rounded-xl flex items-center justify-between shadow-lg ${colors[index % 4]} ${results?.correctOptionId !== opt.id ? 'opacity-50 grayscale-[30%]' : 'ring-4 ring-white/50'}`}>
+                 <div className="drop-shadow-md">{shapes[index % 4]}</div>
+                 <span className="font-bold text-lg md:text-xl text-center flex-1 px-4 line-clamp-2 leading-tight drop-shadow-md">{opt.text}</span>
+               </div>
+             )
+           })}
         </div>
       </div>
     );

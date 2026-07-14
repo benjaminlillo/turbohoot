@@ -127,7 +127,7 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
           <h2 className="text-xl md:text-2xl font-bold">{question?.text}</h2>
         </div>
 
-        <div className="answer-grid h-full max-h-[60vh] w-full max-w-4xl">
+        <div className="answer-grid h-full w-full max-w-4xl flex-1 mt-4">
           {question?.options.map((opt: any, index: number) => {
             const isPressed = hasAnswered; // We'll just disable the visual state globally for now or keep it simple
             
@@ -144,11 +144,10 @@ export default function PlayerGame({ params }: { params: Promise<{ pin: string }
                 key={opt.id}
                 onClick={() => handleAnswer(opt.id)}
                 disabled={hasAnswered}
-                className={`answer-btn ${colors[index % 4]} flex items-center justify-between px-4 md:px-8 text-lg md:text-xl ${hasAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`answer-btn ${colors[index % 4]} flex flex-col items-center justify-center gap-2 p-2 ${hasAnswered ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="drop-shadow-md scale-75 md:scale-100">{shapes[index % 4]}</div>
-                <span className="font-bold flex-1 text-center drop-shadow-md">{opt.text}</span>
-                <div className="w-6 md:w-8"></div> {/* Spacer for balance */}
+                <span className="font-bold text-center drop-shadow-md text-sm md:text-xl leading-tight line-clamp-3">{opt.text}</span>
               </button>
             );
           })}
