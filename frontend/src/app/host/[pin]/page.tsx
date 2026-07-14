@@ -100,15 +100,15 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   };
 
   const renderLobby = () => (
-    <div className="flex flex-col items-center w-full h-full p-8">
-      <div className="glass-panel p-8 flex justify-between items-center w-full max-w-4xl mb-8">
-        <div className="flex flex-col gap-4">
+    <div className="flex flex-col items-center w-full flex-1 p-4 md:p-8">
+      <div className="glass-panel p-6 md:p-8 flex flex-col md:flex-row justify-between items-center w-full max-w-4xl mb-8 gap-6 md:gap-0">
+        <div className="flex flex-col gap-4 w-full text-center md:text-left items-center md:items-start">
           <div>
             <h2 className="text-lg md:text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
             <div className="text-4xl md:text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
           </div>
           {joinUrl && (
-            <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit">
+            <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit mx-auto md:mx-0">
               <span className="text-sm text-gray-400 px-2 truncate max-w-[200px] sm:max-w-[300px]">{joinUrl}</span>
               <button 
                 onClick={() => {
@@ -126,22 +126,22 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
         <button 
           onClick={handleStart}
           disabled={players.length === 0}
-          className="btn-secondary text-2xl py-4 px-12 disabled:opacity-50"
+          className="btn-secondary text-2xl py-4 px-12 disabled:opacity-50 w-full md:w-auto"
         >
           Start
         </button>
       </div>
 
-      <div className="flex-1 w-full max-w-6xl">
-        <h3 className="text-2xl font-bold mb-6">Players ({players.length})</h3>
-        <div className="flex flex-wrap gap-4">
+      <div className="flex-1 w-full max-w-6xl px-2 md:px-0">
+        <h3 className="text-2xl font-bold mb-6 text-center md:text-left">Players ({players.length})</h3>
+        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
           {players.map((p) => (
-            <div key={p.id} className="bg-[rgba(255,255,255,0.1)] px-6 py-3 rounded-full text-xl font-bold animate-fade-in">
+            <div key={p.id} className="bg-[rgba(255,255,255,0.1)] px-6 py-3 rounded-full text-xl font-bold animate-fade-in shadow-md">
               {p.name}
             </div>
           ))}
           {players.length === 0 && (
-            <div className="text-gray-400 italic">Waiting for players...</div>
+            <div className="text-gray-400 italic w-full text-center md:text-left">Waiting for players...</div>
           )}
         </div>
       </div>
@@ -152,18 +152,18 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
     const colors = ['color-red', 'color-blue', 'color-yellow', 'color-green'];
     
     return (
-      <div className="flex flex-col items-center w-full min-h-screen p-8 justify-between">
-        <div className="w-full flex justify-between items-center mb-4">
-          <div className="text-xl font-bold">Question {questionIndex + 1} of {totalQuestions}</div>
-          <div className="flex items-center gap-6">
-            <div className={`text-5xl font-black ${timeLeft <= 5 ? 'text-red-500' : 'text-white'}`}>
+      <div className="flex flex-col items-center w-full min-h-screen p-4 md:p-8 justify-between">
+        <div className="w-full max-w-6xl flex justify-between items-center mb-4">
+          <div className="text-lg md:text-xl font-bold">Question {questionIndex + 1} of {totalQuestions}</div>
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className={`text-4xl md:text-5xl font-black ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
               {timeLeft}
             </div>
-            <button onClick={handleSkipTime} className="btn-secondary py-2 px-4 text-lg">Skip</button>
+            <button onClick={handleSkipTime} className="btn-secondary py-2 px-4 text-sm md:text-lg">Skip</button>
           </div>
         </div>
 
-        <div className="glass-panel p-6 md:p-12 w-full max-w-4xl mb-12 flex items-center justify-center min-h-[200px] md:min-h-[300px]">
+        <div className="glass-panel p-6 md:p-12 w-full max-w-4xl mb-8 md:mb-12 flex items-center justify-center min-h-[150px] md:min-h-[300px] shadow-xl">
           <h2 className="text-2xl md:text-4xl font-bold text-center leading-tight">{question?.text}</h2>
         </div>
 
@@ -195,15 +195,15 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
     const colors = ['color-red', 'color-blue', 'color-yellow', 'color-green'];
 
     return (
-      <div className="flex flex-col items-center w-full min-h-screen p-8 justify-between">
-        <div className="w-full flex justify-between items-center mb-4">
-          <h2 className="text-4xl font-bold">Results</h2>
-          <button onClick={handleNext} className="btn-primary text-xl py-3 px-8">
+      <div className="flex flex-col items-center w-full min-h-screen p-4 md:p-8 justify-between">
+        <div className="w-full max-w-6xl flex justify-between items-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold">Results</h2>
+          <button onClick={handleNext} className="btn-primary text-lg md:text-xl py-2 px-6 md:py-3 md:px-8">
             Next
           </button>
         </div>
 
-        <div className="flex-1 w-full flex items-end justify-center gap-4 md:gap-12 mb-12 max-w-6xl mt-8">
+        <div className="flex-1 w-full flex items-end justify-center gap-2 md:gap-12 mb-8 md:mb-12 max-w-6xl mt-4 md:mt-8 px-2 md:px-0">
           {question?.options.map((opt: any, index: number) => {
             const count = results?.answerCounts?.[opt.id] || 0;
             const isCorrect = results?.correctOptionId === opt.id;
@@ -252,25 +252,25 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   };
 
   const renderLeaderboard = () => (
-    <div className="flex flex-col items-center w-full min-h-screen p-8">
-      <h2 className="text-4xl md:text-6xl font-black mb-16 mt-12 text-yellow-400 drop-shadow-[0_4px_15px_rgba(250,204,21,0.4)]">
+    <div className="flex flex-col items-center w-full min-h-screen p-4 md:p-8">
+      <h2 className="text-4xl md:text-6xl font-black mb-12 md:mb-16 mt-8 md:mt-12 text-yellow-400 drop-shadow-[0_4px_15px_rgba(250,204,21,0.4)]">
         Leaderboard
       </h2>
       
-      <div className="w-full max-w-4xl flex flex-col gap-6">
+      <div className="w-full max-w-4xl flex flex-col gap-4 md:gap-6 px-2 md:px-0">
         {leaderboard.map((player, index) => (
           <div 
             key={player.id} 
-            className={`glass-panel p-6 px-12 flex justify-between items-center animate-fade-in shadow-xl transition-transform hover:scale-[1.02]`}
+            className={`glass-panel p-4 md:p-6 px-6 md:px-12 flex justify-between items-center animate-fade-in shadow-xl transition-transform hover:scale-[1.02]`}
             style={{ animationDelay: `${index * 0.15}s` }}
           >
-            <div className="flex items-center gap-8">
-              <span className={`text-4xl font-black w-12 text-center ${index === 0 ? 'text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]' : index === 1 ? 'text-gray-300 drop-shadow-[0_0_15px_rgba(209,213,219,0.5)]' : index === 2 ? 'text-amber-600 drop-shadow-[0_0_15px_rgba(217,119,6,0.5)]' : 'text-white/50'}`}>
+            <div className="flex items-center gap-4 md:gap-8">
+              <span className={`text-3xl md:text-4xl font-black w-8 md:w-12 text-center ${index === 0 ? 'text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]' : index === 1 ? 'text-gray-300 drop-shadow-[0_0_15px_rgba(209,213,219,0.5)]' : index === 2 ? 'text-amber-600 drop-shadow-[0_0_15px_rgba(217,119,6,0.5)]' : 'text-white/50'}`}>
                 {index + 1}
               </span>
-              <span className="text-3xl font-bold">{player.name}</span>
+              <span className="text-2xl md:text-3xl font-bold truncate max-w-[150px] md:max-w-xs">{player.name}</span>
             </div>
-            <span className="text-3xl font-black bg-[rgba(0,0,0,0.4)] px-6 py-2 rounded-xl border border-white/10">{player.score}</span>
+            <span className="text-2xl md:text-3xl font-black bg-[rgba(0,0,0,0.4)] px-4 md:px-6 py-2 rounded-xl border border-white/10">{player.score}</span>
           </div>
         ))}
       </div>
