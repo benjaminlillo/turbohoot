@@ -100,8 +100,8 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   };
 
   const renderLobby = () => (
-    <div className="flex flex-col items-center justify-center w-full flex-1 p-4 md:p-8 min-h-[80vh]">
-      <div className="glass-panel p-6 md:p-12 flex flex-col items-center w-full max-w-5xl gap-8 md:gap-10 shadow-2xl">
+    <div className="flex flex-col items-center justify-center w-full flex-1 px-4 py-8 md:px-12 md:py-12 min-h-[80vh]">
+      <div className="glass-panel p-8 md:p-16 flex flex-col items-center w-full max-w-5xl gap-8 md:gap-12 shadow-2xl">
         
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8 md:gap-0">
           <div className="flex flex-col gap-4 w-full text-center md:text-left items-center md:items-start">
