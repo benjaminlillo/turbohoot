@@ -215,7 +215,7 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
                 <div className="text-2xl md:text-5xl font-black mb-4 drop-shadow-lg">{count}</div>
                 <div 
                   className={`w-full rounded-t-xl transition-all duration-1000 ease-out flex flex-col items-center justify-start pt-4 md:pt-8 ${colors[index % 4]} ${!isCorrect && 'opacity-50 grayscale-[30%]'} shadow-2xl relative overflow-hidden`}
-                  style={{ height: \`${Math.max(heightPercent, 5)}%\` }}
+                  style={{ height: `${Math.max(heightPercent, 5)}%` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                   <div className="relative z-10">
