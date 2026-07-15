@@ -110,15 +110,15 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
               <div className="text-5xl md:text-7xl font-black text-[var(--primary-light)] mt-2 drop-shadow-md">{pin}</div>
             </div>
             {joinUrl && (
-              <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit mx-auto md:mx-0 mt-2 shadow-inner">
-                <span className="text-sm text-gray-400 px-2 truncate max-w-[200px] sm:max-w-[300px]">{joinUrl}</span>
+              <div className="flex items-center gap-3 md:gap-4 bg-[rgba(0,0,0,0.3)] p-3 md:p-4 rounded-2xl border border-white/10 w-fit mx-auto md:mx-0 mt-4 shadow-inner">
+                <span className="text-base md:text-xl text-gray-300 px-2 truncate max-w-[250px] sm:max-w-[400px] md:max-w-[500px] tracking-wide">{joinUrl}</span>
                 <button 
                   onClick={() => {
                     navigator.clipboard.writeText(joinUrl);
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                   }}
-                  className="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
+                  className="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] px-6 py-3 md:px-8 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all whitespace-nowrap shadow-md active:scale-95"
                 >
                   {copied ? 'Copied!' : 'Copy Link'}
                 </button>
