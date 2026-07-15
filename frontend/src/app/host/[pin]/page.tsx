@@ -110,7 +110,7 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
               <div className="text-5xl md:text-7xl font-black text-[var(--primary-light)] mt-2 drop-shadow-md">{pin}</div>
             </div>
             {joinUrl && (
-              <div className="flex items-center gap-4 bg-black/30 px-6 py-4 md:px-8 md:py-4 rounded-2xl border border-white/10 w-fit mx-auto md:mx-0 mt-4 shadow-inner">
+              <div className="url-container mx-auto md:mx-0">
                 <span className="text-base md:text-xl text-gray-300 truncate max-w-[250px] sm:max-w-[400px] md:max-w-[500px] tracking-wide font-medium">{joinUrl}</span>
                 <button 
                   onClick={() => {
@@ -118,7 +118,7 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                   }}
-                  className="bg-white/10 hover:bg-white/20 px-6 py-3 md:px-8 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all whitespace-nowrap shadow-md active:scale-95 ml-2 md:ml-4"
+                  className="btn-copy"
                 >
                   {copied ? 'Copied!' : 'Copy Link'}
                 </button>
