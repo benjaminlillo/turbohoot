@@ -100,50 +100,57 @@ export default function HostGame({ params }: { params: Promise<{ pin: string }> 
   };
 
   const renderLobby = () => (
-    <div className="flex flex-col items-center w-full flex-1 p-4 md:p-8">
-      <div className="glass-panel p-6 md:p-8 flex flex-col md:flex-row justify-between items-center w-full max-w-4xl mb-8 gap-6 md:gap-0">
-        <div className="flex flex-col gap-4 w-full text-center md:text-left items-center md:items-start">
-          <div>
-            <h2 className="text-lg md:text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
-            <div className="text-4xl md:text-6xl font-black text-[var(--primary-light)] mt-2">{pin}</div>
+    <div className="flex flex-col items-center justify-center w-full flex-1 p-4 md:p-8 min-h-[80vh]">
+      <div className="glass-panel p-6 md:p-12 flex flex-col items-center w-full max-w-5xl gap-8 md:gap-10 shadow-2xl">
+        
+        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8 md:gap-0">
+          <div className="flex flex-col gap-4 w-full text-center md:text-left items-center md:items-start">
+            <div>
+              <h2 className="text-lg md:text-xl text-gray-300 uppercase tracking-widest">Join at TurboHoot with PIN:</h2>
+              <div className="text-5xl md:text-7xl font-black text-[var(--primary-light)] mt-2 drop-shadow-md">{pin}</div>
+            </div>
+            {joinUrl && (
+              <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit mx-auto md:mx-0 mt-2 shadow-inner">
+                <span className="text-sm text-gray-400 px-2 truncate max-w-[200px] sm:max-w-[300px]">{joinUrl}</span>
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(joinUrl);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
+                >
+                  {copied ? 'Copied!' : 'Copy Link'}
+                </button>
+              </div>
+            )}
           </div>
-          {joinUrl && (
-            <div className="flex items-center gap-2 bg-[rgba(0,0,0,0.3)] p-2 rounded-xl border border-white/10 w-fit mx-auto md:mx-0">
-              <span className="text-sm text-gray-400 px-2 truncate max-w-[200px] sm:max-w-[300px]">{joinUrl}</span>
-              <button 
-                onClick={() => {
-                  navigator.clipboard.writeText(joinUrl);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
-                }}
-                className="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] px-4 py-2 rounded-lg text-sm font-bold transition-colors whitespace-nowrap"
-              >
-                {copied ? 'Copied!' : 'Copy Link'}
-              </button>
-            </div>
-          )}
+          
+          <button 
+            onClick={handleStart}
+            disabled={players.length === 0}
+            className="btn-secondary text-2xl md:text-3xl py-4 px-12 md:py-6 md:px-14 disabled:opacity-50 w-full md:w-auto shadow-xl"
+          >
+            Start
+          </button>
         </div>
-        <button 
-          onClick={handleStart}
-          disabled={players.length === 0}
-          className="btn-secondary text-2xl py-4 px-12 disabled:opacity-50 w-full md:w-auto"
-        >
-          Start
-        </button>
-      </div>
 
-      <div className="flex-1 w-full max-w-6xl px-2 md:px-0">
-        <h3 className="text-2xl font-bold mb-6 text-center md:text-left">Players ({players.length})</h3>
-        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-          {players.map((p) => (
-            <div key={p.id} className="bg-[rgba(255,255,255,0.1)] px-6 py-3 rounded-full text-xl font-bold animate-fade-in shadow-md">
-              {p.name}
-            </div>
-          ))}
-          {players.length === 0 && (
-            <div className="text-gray-400 italic w-full text-center md:text-left">Waiting for players...</div>
-          )}
+        <div className="w-full h-px bg-white/10 my-2"></div>
+
+        <div className="w-full min-h-[200px]">
+          <h3 className="text-2xl font-bold mb-6 text-center md:text-left">Players ({players.length})</h3>
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            {players.map((p) => (
+              <div key={p.id} className="bg-[rgba(255,255,255,0.1)] border border-white/5 px-6 py-3 rounded-full text-lg md:text-xl font-bold animate-fade-in shadow-md">
+                {p.name}
+              </div>
+            ))}
+            {players.length === 0 && (
+              <div className="text-gray-400 italic w-full text-center md:text-left text-lg">Waiting for players to join...</div>
+            )}
+          </div>
         </div>
+
       </div>
     </div>
   );
